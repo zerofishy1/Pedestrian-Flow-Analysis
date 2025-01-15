@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Site</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Анимация на фоне -->
+    <div id="particles-js"></div>
+
+    <!-- Верхнее меню -->
+    <div class="top-menu">
+        <div class="menu-item" data-tooltip="Программа анализирует видеозаписи с помощью YOLO и ByteTrack, чтобы определить количество пешеходов, их движение и построить графики изменений.">
+            Как это работает?
+            <div class="info-popup">Программа анализирует видеозаписи с помощью YOLO и ByteTrack, чтобы определить количество пешеходов, их движение и построить графики изменений.</div>
+        </div>
+        <div class="menu-item" data-tooltip="Разработчик алгоритма: Telegram | GitHub, Разработчик сайта: Telegram | GitHub">
+            Разработчики
+            <div class="info-popup">
+                <div>
+                    <strong>Разработчик алгоритма:</strong><br>
+                    <a href="https://t.me/zerofishy" target="_blank">Telegram</a> | <a href="https://github.com/zerofishy1" target="_blank">GitHub</a>
+                </div>
+                <br>
+                <div>
+                    <strong>Разработчик сайта:</strong><br>
+                    <a href="https://t.me/leaxy" target="_blank">Telegram</a> | <a href="https://github.com/exleaxy" target="_blank">GitHub</a>
+                </div>
+                <br>
+                <div>
+                    <a href="https://github.com/zerofishy1/Pedestrian-Flow-Analysis" target="_blank">GitHub Репозиторий</a>
+                </div>
+            </div>
+        </div>
+        <div class="menu-item" data-tooltip="История загрузок">
+            История загрузок
+            <div class="info-popup">
+                {% if files %}
+                <ul class="file-list">
+                    {% for file in files %}
+                    <li class="file-item" title="Файл: {{ file }}">{{ file }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                История пуста
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Центральная область -->
+    <div class="center-content">
+        <h1 style="color: #00e6e6">Анализируйте пешеходов</h1>
+        <p style="color: white;">Загрузите видео, чтобы получить подробную статистику о пешеходах.</p>
+        <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <label class="upload-button">
+                <input type="file" id="file-input" name="file" accept="video/*">
+                <span>Загрузить файл</span>
+            </label>
+            <p id="file-name"></p>
+        </form>
+
+        <!-- Место для отображения результатов -->
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- Подключение библиотек -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="particles-config.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const fileName = document.getElementById('file-name');
+        const form = document.getElementById('upload-form');
+    
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files.length > 0) {
+                fileName.textContent = `Ожидайте завершения обработки. Выбран файл: ${fileInput.files[0].name}`;
+                form.submit(); // Автоматически отправляет форму
+            } else {
+                fileName.textContent = '';
+            }
+        });
+    </script>    
+</body>
+</html>

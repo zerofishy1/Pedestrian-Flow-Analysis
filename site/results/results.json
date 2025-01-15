@@ -1,0 +1,9 @@
+{
+    "total_unique_people": 9,
+    "movement_statistics": {
+        "вверх": 3,
+        "вниз": 2,
+        "налево": 2,
+        "направо": 2
+    }
+}

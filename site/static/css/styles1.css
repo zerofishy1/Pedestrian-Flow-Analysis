@@ -1,0 +1,158 @@
+/* Стили для страницы результатов */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Фон с анимацией */
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Центральная область */
+.center-content {
+    text-align: center;
+    z-index: 1;
+}
+
+/* Заголовок серого цвета */
+.gray-title {
+    color: #00e6e6;
+}
+
+/* Число в центре */
+#unique-people-count {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1px 0;
+    margin-right:15px; 
+}
+
+
+/* Контейнер диаграммы */
+.bar-chart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 200px;
+    width: 80%;
+    margin: 0px auto;
+    position: relative;
+    z-index: 1; /* Добавлено */
+}
+
+
+/* Контейнер для каждого столбца */
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    position: relative;
+}
+
+/* Столбец диаграммы */
+.bar {
+    width: 75%; /* Сделали столбцы шире */
+    background: linear-gradient(to top, #00b0b0, #00e6e6); /* Градиент от темного к светлому */
+    border-radius: 4px 4px 0 0; /* Скругление только сверху */
+    height: 0; /* Изначальная высота */
+    transition: height 1s ease-out;
+    position: relative;
+    margin-top: -4px; /* Чуть перекрываем линию */
+}
+
+/* Числа над столбцами */
+.bar::after {
+    content: attr(data-label);
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Горизонтальная линия */
+.base-line {
+    width: 100%;
+    height: 2.4px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Контейнер для подписей направлений */
+.direction-labels {
+    display: flex;
+    justify-content: center; /* Центрируем весь текстовый блок */
+    gap: 20px; /* Расстояние между элементами */
+    margin-top: 10px;
+    color: white;
+    font-size: 1rem;
+}
+
+/* Каждый отдельный текстовый блок */
+.direction-labels p {
+    margin: 0;
+    text-align: center;
+    width: 74px; /* Ширина подписи, соответствующая ширине столбца */
+    font-weight: 200;
+}
+
+/* Кнопка возвращения */
+.daun {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #00e6e6;
+    color: #00e6e6;
+    padding: 15px 40px;
+    border-radius: 30px; /* Полностью овальная форма */
+    font-size: 16px;
+    font-weight: bold; /* Добавлено свойство для жирного текста */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 58px;
+}
+
+.daun:hover {
+    background-color: #00e6e6;
+    color: black;
+}
+
+/* Кнопка сохранения */
+.save-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 2px solid #00e6e6;
+    color: #00e6e6;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 2; /* Добавлено */
+}
+
+.save-button:hover {
+    background-color: #00e6e6;
+    color: black;
+}
+

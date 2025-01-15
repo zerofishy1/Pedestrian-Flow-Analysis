@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты обработки видео</title>
+    <link rel="stylesheet" href="/static/css/styles1.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="center-content">
+        <header>
+            <h1 class="gray-title" style="margin-bottom: 35px;">Результаты обработки видео</h1>
+        </header>
+
+        {% if results %}
+            <main>
+                <section style="margin-bottom: 58px;">
+                    <h2>Общее количество людей:</h2>
+                    <p style="color: #00e6e6" id="unique-people-count" data-count="{{ results['total_unique_people'] }}">0</p>
+                </section>
+                <section>
+                    <h2>Статистика по направлениям:</h2>
+                    <div class="bar-chart" style="margin-top: 70px">
+                        {% for direction, count in results['movement_statistics'].items() %}
+                            <div class="bar-container">
+                                <div class="bar" style="--height: {{ count }};" data-label="{{ count }}"></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="base-line"></div>
+                    <div class="direction-labels">
+                        <p>Вверх</p>
+                        <p>Вниз</p>
+                        <p>Налево</p>
+                        <p>Направо</p>
+                    </div>
+                </section>
+
+                <a href="/" class="daun"  style="text-decoration:none;">Вернуться на главную страницу</a>
+                     
+            </main>
+        {% else %}
+            <main>
+                <п>Результатов пока нет. Загрузите видео для обработки.</п>
+            </main>
+        {% endif %}
+    </div>
+
+    <button id="saveBtn" class="save-button">Сохранить в виде фото</button>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/static/js/particles-config.js"></script>
+    <script src="/static/js/script1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    
+</body>
+</html>
