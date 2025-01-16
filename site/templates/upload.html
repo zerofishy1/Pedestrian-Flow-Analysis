@@ -6,6 +6,9 @@
     <title>Результаты обработки видео</title>
     <link rel="stylesheet" href="/static/css/styles1.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <style>
+
+    </style>
 </head>
 <body>
     <div id="particles-js"></div>
@@ -23,7 +26,7 @@
                 </section>
                 <section>
                     <h2>Статистика по направлениям:</h2>
-                    <div class="bar-chart" style="margin-top: 70px">
+                    <div class="bar-chart" style="margin-top: 85px">
                         {% for direction, count in results['movement_statistics'].items() %}
                             <div class="bar-container">
                                 <div class="bar" style="--height: {{ count }};" data-label="{{ count }}"></div>
@@ -39,23 +42,82 @@
                     </div>
                 </section>
 
-                <a href="/" class="daun"  style="text-decoration:none;">Вернуться на главную страницу</a>
-                     
+                <a href="/" class="daun" style="text-decoration:none;">Вернуться на главную страницу</a>
+
+                <p></p>
+                
+<!--                 
+                <video width="480" height="360" style='margin-top: 70px;' controls>
+                    <source src="{{ url_for('static', filename='output.mp4') }}" type="video/mp4">
+                    Ваш браузер не поддерживает воспроизведение видео.
+                </video>                              
+ -->
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Направление</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Здесь будут добавлены строки -->
+                    </tbody>
+                </table>
+
             </main>
         {% else %}
             <main>
-                <п>Результатов пока нет. Загрузите видео для обработки.</п>
+                <p>Результатов пока нет. Загрузите видео для обработки.</p>
             </main>
         {% endif %}
     </div>
 
     <button id="saveBtn" class="save-button">Сохранить в виде фото</button>
+    <button class="scroll-button" id="scrollButton">Информация об ID</button>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="/static/js/particles-config.js"></script>
     <script src="/static/js/script1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="application/json" id="id_directions">{{ results['id_directions']|tojson|safe }}</script>
 
+    <script>
+        const idDirections = JSON.parse(document.getElementById('id_directions').textContent);
+        const tableBody = document.getElementById("tableBody");
+    
+        for (const [id, direction] of Object.entries(idDirections)) {
+            const row = document.createElement("tr");
+            const idCell = document.createElement("td");
+            const directionCell = document.createElement("td");
+    
+            idCell.textContent = id;
+            directionCell.textContent = direction;
+    
+            row.appendChild(idCell);
+            row.appendChild(directionCell);
+            tableBody.appendChild(row);
+        }
+
+        // Скроллинг страницы вниз при нажатии на кнопку
+        document.getElementById("scrollButton").addEventListener("click", function() {
+            window.scrollBy({
+                top: window.innerHeight, // Прокрутка на высоту окна
+                behavior: 'smooth' // Плавная прокрутка
+            });
+            this.classList.add('hidden'); // Скрываем кнопку после нажатия
+        });
+
+        // Показ/скрытие кнопки при прокрутке
+        window.addEventListener("scroll", function() {
+            const scrollButton = document.getElementById("scrollButton");
+            if (window.scrollY < 200) { // Пороговое значение прокрутки
+                scrollButton.classList.remove('hidden');
+            } else {
+                scrollButton.classList.add('hidden');
+            }
+        });
+    </script>
     
 </body>
 </html>
