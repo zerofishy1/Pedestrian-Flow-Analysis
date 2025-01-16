@@ -30,13 +30,6 @@ body {
     margin-top: 20px;
 }
 
-.menu-item {
-    position: relative;
-    font-size: 16px;
-    cursor: pointer;
-    color: #00e6e6;
-}
-
 
 /* Анимация подсказок */
 @keyframes fade-in {
@@ -121,7 +114,7 @@ input[type="file"] {
 .menu-item {
     position: relative;
     font-size: 16px;
-    cursor: pointer;
+    cursor: default;
     color: #00e6e6;
 }
 
