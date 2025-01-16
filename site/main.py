@@ -7,7 +7,7 @@ import json
 import time
 import os
 
-def process_video(video_path, output_video_path="output.mp4"): 
+def process_video(video_path, output_video_path="output.mp4"):
     # Загрузка модели YOLO
     model = YOLO('yolov8n.pt')
 
@@ -27,14 +27,6 @@ def process_video(video_path, output_video_path="output.mp4"):
 
     # Настройка видеозаписи
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-
-    # Сохранение видео в папку 'static'
-    static_folder = 'static'  # Папка для сохранения видео
-    if not os.path.exists(static_folder):
-        os.makedirs(static_folder)  # Если папка 'static' не существует, создаем её
-
-    # Генерация пути для сохранения видео в папке 'static'
-    output_video_path = os.path.join(static_folder, output_video_path)
     out = cv2.VideoWriter(output_video_path, fourcc, fps, (width, height))
 
     # Инициализация переменных
@@ -154,8 +146,7 @@ def process_video(video_path, output_video_path="output.mp4"):
         cv2.destroyAllWindows()
 
         # Сохранение результатов
-        results_path = os.path.join(static_folder, "results/results.json")
-        os.makedirs(os.path.dirname(results_path), exist_ok=True)  # Создание папки для результатов, если её нет
+        results_path = "results/results.json"
         with open(results_path, "w", encoding="utf-8") as f:
             json.dump({
                 "total_unique_people": len(tracked_ids),
@@ -166,6 +157,7 @@ def process_video(video_path, output_video_path="output.mp4"):
             }, f, ensure_ascii=False, indent=4)
 
         print(f"Обработка завершена. Результаты сохранены в {results_path} и {output_video_path}.")
+
 
 
 def process_all_videos_in_uploads():
