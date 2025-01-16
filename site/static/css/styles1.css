@@ -8,13 +8,15 @@ body {
     justify-content: center;
     /* align-items: center; */
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
+    min-height: 200vh;
+    height: 100%;
 }
 
 /* Фон с анимацией */
 #particles-js {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -151,8 +153,58 @@ body {
     z-index: 2; /* Добавлено */
 }
 
+.scroll-button {
+    position: fixed; /* Изменено на fixed для прикрепления к экрану */
+    bottom: 20px; /* Изменено для размещения в нижнем правом углу */
+    right: 20px;
+    background: transparent;
+    border: 2px solid #00e6e6;
+    color: #00e6e6;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, opacity 0.5s ease-in-out; /* Плавный переход */
+    z-index: 2;
+    opacity: 1;
+}
+
+.scroll-button.hidden {
+    opacity: 0;
+}
+
+.scroll-button:hover {
+    background-color: #00e6e6;
+    color: black;
+}
+
 .save-button:hover {
     background-color: #00e6e6;
     color: black;
+}
+
+
+
+/* Таблица */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1rem;
+    border: 1px solid #ffffff;
+    margin-top: 100px;
+}
+
+th, td {
+    border: 1px solid #ffffff;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #00b0b0;
 }
 
